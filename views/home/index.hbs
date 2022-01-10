@@ -1,0 +1,26 @@
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<div class="chatbar">
+  {{#each texts }}
+    <p>{{{ this }}}</p>
+  {{/each}}
+</div>
+<input type="text" id='textbar'>
+<button type="submit" onclick="click_submit()">생성</button>
+
+
+<script>
+  function click_submit(){
+    text = $('#textbar').val()
+    console.log(text)
+    $.ajax({
+      type: 'post',
+      url: '/home/',
+      data: { text: text },
+      dataType: 'text',
+      success: () => {
+        $('.chatbar').append(`<p>${text}</p>`)
+        $('#textbar').val() = ''
+      }
+    })
+  }
+</script>
